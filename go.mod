@@ -10,7 +10,7 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-redis/redis/v8 v8.11.5
 	github.com/prometheus/client_golang v1.20.1
-	github.com/satlayer/satlayer-api v0.3.0
+	github.com/satlayer/satlayer-api v0.4.0
 	github.com/stretchr/testify v1.9.0
 	golang.org/x/exp v0.0.0-20240909161429-701f63a606c0
 )
