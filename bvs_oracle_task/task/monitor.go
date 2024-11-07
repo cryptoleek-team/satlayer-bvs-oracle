@@ -12,7 +12,7 @@ import (
 
 	"github.com/satlayer/satlayer-api/chainio/io"
 
-	"github.com/satlayer/hello-world-bvs/task/core"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/bvs_oracle_task/core"
 	"github.com/satlayer/satlayer-api/chainio/api"
 	"github.com/satlayer/satlayer-api/chainio/indexer"
 )

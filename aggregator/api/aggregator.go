@@ -8,10 +8,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/satlayer/hello-world-bvs/aggregator/core"
-	"github.com/satlayer/hello-world-bvs/aggregator/svc"
-	"github.com/satlayer/hello-world-bvs/aggregator/util"
-	"github.com/satlayer/satlayer-api/signer"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/aggregator/core"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/aggregator/svc"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/aggregator/util"	
 )
 
 type Payload struct {
@@ -61,12 +60,12 @@ func Aggregator(c *gin.Context) {
 	fmt.Printf("address: %s\n", address)
 	fmt.Printf("payload.PubKey: %s\n", payload.PubKey)
 
-	msgPayload := fmt.Sprintf("%s-%d-%d-%d", core.C.Chain.BvsHash, payload.Timestamp, payload.TaskId, payload.Result)
-	msgBytes := []byte(msgPayload)
-	if isValid, err := signer.VerifySignature(pubKey, msgBytes, payload.Signature); err != nil || !isValid {
-		c.JSON(http.StatusBadRequest, gin.H{"error": "invalid signature"})
-		return
-	}
+	// msgPayload := fmt.Sprintf("%s-%d-%d-%d", core.C.Chain.BvsHash, payload.Timestamp, payload.TaskId, payload.Result)
+	// msgBytes := []byte(msgPayload)
+	// if isValid, err := signer.VerifySignature(pubKey, msgBytes, payload.Signature); err != nil || !isValid {
+	// 	c.JSON(http.StatusBadRequest, gin.H{"error": "invalid signature"})
+	// 	return
+	// }
 
 	// verify task is finished
 	pkTaskFinished := fmt.Sprintf("%s%d", core.PkTaskFinished, payload.TaskId)

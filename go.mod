@@ -1,4 +1,4 @@
-module github.com/satlayer/hello-world-bvs
+module github.com/cryptoleek-team/satlayer-bvs-oracle
 
 go 1.22.5
 
@@ -228,4 +228,5 @@ require (
 	sigs.k8s.io/yaml v1.4.0 // indirect
 )
 
-replace github.com/satlayer/satlayer-api v0.3.0 => /Users/seabookchen/coding/web3-projects/OpenBit/devnet-satlayer-api
+replace github.com/satlayer/satlayer-api v0.4.0 => /Users/seabookchen/coding/web3-projects/OpenBit/devnet-satlayer-api
+replace github.com/cryptoleek-team/satlayer-bvs-oracle => ./

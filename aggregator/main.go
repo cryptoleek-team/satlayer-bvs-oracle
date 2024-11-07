@@ -6,9 +6,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/satlayer/hello-world-bvs/aggregator/api"
-	"github.com/satlayer/hello-world-bvs/aggregator/core"
-	"github.com/satlayer/hello-world-bvs/aggregator/svc"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/aggregator/api"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/aggregator/core"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/aggregator/svc"
 )
 
 // main is the entry point of the program.

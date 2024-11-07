@@ -16,8 +16,8 @@ import (
 
 	"github.com/satlayer/satlayer-api/chainio/io"
 
-	"github.com/satlayer/hello-world-bvs/aggregator/core"
-	BvsSquaringApi "github.com/satlayer/hello-world-bvs/bvs_squaring_api"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/aggregator/core"
+	OracleBvsApi "github.com/cryptoleek-team/satlayer-bvs-oracle/oracle_bvs_api"
 	"github.com/satlayer/satlayer-api/chainio/api"
 )
 
@@ -173,9 +173,9 @@ func (m *Monitor) verifyTask(ctx context.Context, taskId uint64) {
 func (m *Monitor) sendTaskResult(taskId uint64, result int64, operators string) error {
 	fmt.Println("sendTaskResult", taskId, result, operators)
 
-	bvsSquaring := BvsSquaringApi.NewBVSSquaring(m.chainIO)
-	bvsSquaring.BindClient(m.bvsContract)
-	_, err := bvsSquaring.RespondToTask(context.Background(), int64(taskId), result, operators)
+	oracleBVS := OracleBvsApi.NewOracleBVS(m.chainIO)
+	oracleBVS.BindClient(m.bvsContract)
+	_, err := oracleBVS.RespondToTask(context.Background(), int64(taskId), result, operators)
 	if err != nil {
 		return err
 	}

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/satlayer/hello-world-bvs/task/task"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/bvs_oracle_task/task"	
 )
 
 // main checks parameters and runs the appropriate task based on the provided command-line argument.

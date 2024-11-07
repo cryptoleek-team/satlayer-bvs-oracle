@@ -2,8 +2,7 @@ package task
 
 import (
 	"context"
-	"fmt"
-	"math/rand"
+	"fmt"	
 	"time"
 
 	"github.com/prometheus/client_golang/prometheus"
@@ -13,8 +12,8 @@ import (
 
 	"github.com/satlayer/satlayer-api/chainio/io"
 
-	BvsSquaringApi "github.com/satlayer/hello-world-bvs/bvs_squaring_api"
-	"github.com/satlayer/hello-world-bvs/task/core"
+	OracleBvsApi "github.com/cryptoleek-team/satlayer-bvs-oracle/oracle_bvs_api"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/bvs_oracle_task/core"
 	"github.com/satlayer/satlayer-api/chainio/api"
 )
 
@@ -69,14 +68,24 @@ func NewCaller() *Caller {
 // No parameters.
 // No return.
 func (c *Caller) Run() {
-	bvsSquaring := BvsSquaringApi.NewBVSSquaring(c.chainIO)
-	for {
-		bvsSquaring.BindClient(c.bvsContract)
-		randomNumber := rand.Int63n(100)
-		resp, err := bvsSquaring.CreateNewTask(context.Background(), randomNumber)
-		if err != nil {
-			panic(err)
-		}
-		fmt.Printf("resp: %s\n", resp.Hash.String())
+	oracleBVS := OracleBvsApi.NewOracleBVS(c.chainIO)
+	oracleBVS.BindClient(c.bvsContract)
+
+	// Define crypto symbol mapping
+	cryptoMap := map[string]int64{
+		"BTC": 1,
+		"ETH": 2,
+		// Add more mappings as needed
 	}
+
+	btc, ok := cryptoMap["BTC"]
+	if !ok {
+		panic("Cryptocurrency symbol not found in mapping")
+	}
+
+	resp, err := oracleBVS.CreateNewTask(context.Background(), btc)
+	if err != nil {
+		panic(err)
+	}
+	fmt.Printf("resp: %s\n", resp.Hash.String())
 }

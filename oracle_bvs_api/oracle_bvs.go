@@ -1,4 +1,4 @@
-package BvsSquaringApi
+package OracleBvsApi
 
 import (
 	"context"
@@ -11,7 +11,7 @@ import (
 	"github.com/satlayer/satlayer-api/chainio/types"
 )
 
-type BVSSquaring interface {
+type OracleBVS interface {
 	BindClient(string)
 	CreateNewTask(context.Context, int64) (*coretypes.ResultTx, error)
 	RespondToTask(ctx context.Context, taskId int64, result int64, operators string) (*coretypes.ResultTx, error)
@@ -19,13 +19,13 @@ type BVSSquaring interface {
 	GetTaskResult(int64) (*wasmtypes.QuerySmartContractStateResponse, error)
 }
 
-type bvsSquaringImpl struct {
+type oracleBVSImpl struct {
 	io             io.ChainIO
 	executeOptions *types.ExecuteOptions
 	queryOptions   *types.QueryOptions
 }
 
-func (a *bvsSquaringImpl) BindClient(contractAddress string) {
+func (a *oracleBVSImpl) BindClient(contractAddress string) {
 	a.executeOptions = &types.ExecuteOptions{
 		ContractAddr:  contractAddress,
 		ExecuteMsg:    []byte{},
@@ -43,7 +43,7 @@ func (a *bvsSquaringImpl) BindClient(contractAddress string) {
 	}
 }
 
-func (a *bvsSquaringImpl) CreateNewTask(ctx context.Context, input int64) (*coretypes.ResultTx, error) {
+func (a *oracleBVSImpl) CreateNewTask(ctx context.Context, input int64) (*coretypes.ResultTx, error) {
 	msg := types.CreateNewTaskReq{
 		CreateNewTask: types.CreateNewTask{
 			Input: input,
@@ -60,7 +60,7 @@ func (a *bvsSquaringImpl) CreateNewTask(ctx context.Context, input int64) (*core
 	return a.io.SendTransaction(ctx, *a.executeOptions)
 }
 
-func (a *bvsSquaringImpl) RespondToTask(ctx context.Context, taskId int64, result int64, operators string) (*coretypes.ResultTx, error) {
+func (a *oracleBVSImpl) RespondToTask(ctx context.Context, taskId int64, result int64, operators string) (*coretypes.ResultTx, error) {
 	msg := types.RespondToTaskReq{
 		RespondToTask: types.RespondToTask{
 			TaskId:    taskId,
@@ -79,7 +79,7 @@ func (a *bvsSquaringImpl) RespondToTask(ctx context.Context, taskId int64, resul
 	return a.io.SendTransaction(ctx, *a.executeOptions)
 }
 
-func (a *bvsSquaringImpl) GetTaskInput(taskId int64) (*wasmtypes.QuerySmartContractStateResponse, error) {
+func (a *oracleBVSImpl) GetTaskInput(taskId int64) (*wasmtypes.QuerySmartContractStateResponse, error) {
 	msg := types.GetTaskInputReq{
 		GetTaskInput: types.GetTaskInput{
 			TaskId: taskId,
@@ -96,7 +96,7 @@ func (a *bvsSquaringImpl) GetTaskInput(taskId int64) (*wasmtypes.QuerySmartContr
 	return a.io.QueryContract(*a.queryOptions)
 }
 
-func (a *bvsSquaringImpl) GetTaskResult(taskId int64) (*wasmtypes.QuerySmartContractStateResponse, error) {
+func (a *oracleBVSImpl) GetTaskResult(taskId int64) (*wasmtypes.QuerySmartContractStateResponse, error) {
 	msg := types.GetTaskResultReq{
 		GetTaskResult: types.GetTaskResult{
 			TaskId: taskId,
@@ -113,8 +113,8 @@ func (a *bvsSquaringImpl) GetTaskResult(taskId int64) (*wasmtypes.QuerySmartCont
 	return a.io.QueryContract(*a.queryOptions)
 }
 
-func NewBVSSquaring(chainIO io.ChainIO) BVSSquaring {
-	return &bvsSquaringImpl{
+func NewOracleBVS(chainIO io.ChainIO) OracleBVS {
+	return &oracleBVSImpl{
 		io: chainIO,
 	}
 }

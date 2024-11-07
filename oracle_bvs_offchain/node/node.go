@@ -18,7 +18,7 @@ import (
 
 	"github.com/satlayer/satlayer-api/chainio/io"
 
-	"github.com/satlayer/hello-world-bvs/bvs_offchain/core"
+	"github.com/cryptoleek-team/satlayer-bvs-oracle/oracle_bvs_offchain/core"
 	"github.com/satlayer/satlayer-api/chainio/api"
 	"github.com/satlayer/satlayer-api/chainio/indexer"
 )
@@ -36,6 +36,14 @@ type Payload struct {
 	Timestamp int64  `json:"timestamp"`
 	Signature string `json:"signature"`
 	PubKey    string `json:"pubKey"`
+}
+
+type CoinDeskResponse struct {
+	Bpi struct {
+		USD struct {
+			RateFloat float64 `json:"rate_float"`
+		} `json:"USD"`
+	} `json:"bpi"`
 }
 
 // NewNode creates a new Node instance with the given configuration.
@@ -195,23 +203,36 @@ func (n *Node) monitorDriver(ctx context.Context) (err error) {
 // Returns an error if there is an issue with the calculation or sending process.
 func (n *Node) calcTask(taskId string) (err error) {
 	stateKey := fmt.Sprintf("taskId.%s", taskId)
-	fmt.Printf("stateKey: %s\n", stateKey)
-	value, err := n.stateBank.GetWasmUpdateState(stateKey)
+	fmt.Printf("stateKey: %s\n", stateKey)    
+	
+	// Fetch Bitcoin price from CoinDesk API
+	resp, err := http.Get("https://api.coindesk.com/v1/bpi/currentprice.json")
 	if err != nil {
-		return
+		fmt.Printf("Error fetching price: %s\n", err)
+		return err
 	}
-	input, err := strconv.Atoi(value)
+	defer resp.Body.Close()
+
+	var priceData CoinDeskResponse
+	if err = json.NewDecoder(resp.Body).Decode(&priceData); err != nil {
+		fmt.Printf("Error decoding JSON: %s\n", err)
+		return err
+	}
+
+	// Convert the float price to int64 (multiply by 100 to preserve 2 decimal places)
+	result := int64(priceData.Bpi.USD.RateFloat * 100)
+	
 	task, err := strconv.Atoi(taskId)
 	if err != nil {
 		fmt.Println("format err:", err)
-		return
+		return err
 	}
-	result := n.square(int64(input))
+
 	err = n.sendAggregator(int64(task), result)
 	if err != nil {
 		panic(err)
 	}
-	return
+	return nil
 }
 
 // square calculates the square of a given integer.
