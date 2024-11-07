@@ -21,3 +21,8 @@ babylond tx wasm execute bbn18ru4lx39wmwfjx707uuxyu9mt4sjwjnkjx6a37dyg4eatt9jqx9
 babylond query wasm contract-state smart bbn18ru4lx39wmwfjx707uuxyu9mt4sjwjnkjx6a37dyg4eatt9jqx9q0sn2el '{"get_task_input": {"task_id": 72}}' --log_format=json --node https://rpc.sat-bbn-testnet1.satlayer.net
 
 babylond query wasm contract-state smart bbn18ru4lx39wmwfjx707uuxyu9mt4sjwjnkjx6a37dyg4eatt9jqx9q0sn2el '{"get_task_result": {"task_id": 29}}' --log_format=json --node https://rpc.sat-bbn-testnet1.satlayer.net
+
+
+
+
+babylond tx bank send bbn1jkke7s84wwwxhk40anxx5th6j4yq7a4n4ag20u bbn1pt626qqx3tmatxf92dvlpayq8ccwt9ypk3r9hx 5bbn --node https://rpc.sat-bbn-testnet1.satlayer.net --chain-id=sat-bbn-testnet1 --fees 2ubbn
