@@ -227,3 +227,5 @@ require (
 	pgregory.net/rapid v1.1.0 // indirect
 	sigs.k8s.io/yaml v1.4.0 // indirect
 )
+
+replace github.com/satlayer/satlayer-api v0.3.0 => /Users/seabookchen/coding/web3-projects/OpenBit/devnet-satlayer-api
