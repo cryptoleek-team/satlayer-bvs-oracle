@@ -2,12 +2,23 @@
 
 ## Overview
 
-The **SatLayer Oracle BVS** is the first Bitcoin Validated Service (BVS) oracle protocol built on Babylon, leveraging SatLayer's innovative restaking infrastructure([1](https://docs.satlayer.xyz/)). This implementation demonstrates a fully functional, end-to-end oracle solution that utilizes Bitcoin's security model through Babylon's Proof of Stake system.
+The **Fist Babylon SatLayer BVS-enabled Oracle Protocol** is the first Bitcoin Validated Service (BVS) oracle protocol built on Babylon, leveraging SatLayer's innovative restaking infrastructure([1](https://docs.satlayer.xyz/)). This implementation demonstrates a fully functional, end-to-end oracle solution that utilizes Bitcoin's security model through Babylon's Proof of Stake system.
 
+### Presentation
+[Talk Slides](https://cryptoleek-team.github.io/awesome-presentations/bvs-oracle.html)
+
+## Video DEMO
+
+![youtube](https://youtu.be/6AAucuG32oA)
+
+## Github URL
+[https://github.com/cryptoleek-team/satlayer-bvs-oracle
+](https://github.com/cryptoleek-team/satlayer-bvs-oracle)
 ## Architecture
 
+![bbl-sat-bvs-oracle.png](https://cdn.dorahacks.io/static/files/1930a18e4ed85788203dbae49e6b6327.png)
+
 The protocol consists of several key components working together to provide secure and reliable oracle services:
-![bbl-sat-bvs-oracle](https://github.com/user-attachments/assets/3d598375-4aa9-42ba-ba1a-d49168a46dd8)
 
 ### Core Components
 
@@ -29,8 +40,17 @@ The protocol consists of several key components working together to provide secu
 
 - **Reward Distribution**
   - Manages reward distribution to stakers([2](https://docs.satlayer.xyz/restakers/sats))
-  - Implements slashing conditions for malicious behavior
   - Handles Sats² reward calculations
+
+- **Slashing**
+  - Manages Slashing Conditions
+  - Implements slashing conditions for malicious behavior
+  - Handles Sats² slashing calculations
+
+- **Delgation**
+  - Manages User Delegation Conditions
+  - Implements Delegation for different Operatorsbehavior
+  - Handles Delegation Weights Calculations
 
 ## Security Model
 
