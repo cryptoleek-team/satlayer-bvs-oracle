@@ -9,7 +9,8 @@ The **Fist Babylon SatLayer BVS-enabled Oracle Protocol** is the first Bitcoin V
 
 ## Video DEMO
 
-https://youtu.be/6AAucuG32oA?si=ezNonaIqCn3BbXuW
+
+[![Demo](https://img.youtube.com/vi/6AAucuG32oA/0.jpg)](https://youtu.be/6AAucuG32oA?si=ezNonaIqCn3BbXuW)
 
 ## Github URL
 [https://github.com/cryptoleek-team/satlayer-bvs-oracle
