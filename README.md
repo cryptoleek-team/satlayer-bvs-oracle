@@ -7,7 +7,7 @@ The **SatLayer Oracle BVS** is the first Bitcoin Validated Service (BVS) oracle 
 ## Architecture
 
 The protocol consists of several key components working together to provide secure and reliable oracle services:
-![bbl-sat-bvs-oracle](https://github.com/user-attachments/assets/d2693e38-76ac-42ca-8577-d2d88405e64d)
+![bbl-sat-bvs-oracle](https://github.com/user-attachments/assets/3d598375-4aa9-42ba-ba1a-d49168a46dd8)
 
 ### Core Components
 
